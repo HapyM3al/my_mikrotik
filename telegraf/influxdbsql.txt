@@ -1,0 +1,17 @@
+# this is just basic file on how query should be made with influxdb for certain stuff on the mikrotiks. 
+
+#singlestat
+# this is cpu temp. Might not be right. 
+SELECT mean("processor-temperature") / 10 FROM "snmp" WHERE ("hostname" = 'Router_Home') AND time >= now() - 2d GROUP BY time(30m) fill(null)"
+
+#singlestat
+# used ram.
+SELECT mean("used-memory") FROM "snmp-memory-usage" WHERE ("hostname" = 'Router_Home') AND time >= now() - 2d GROUP BY time(30m) fill(null)"
+
+#singlestat
+# uptime
+SELECT mean("uptime") FROM "snmp" WHERE ("hostname" = 'Router_Home') AND time >= now() - 2d GROUP BY time(30m) fill(null)
+
+# graph
+#graph network tracking in/out of routers interface
+SELECT derivative(mean("ifHCInOctets"), 1s) *8 AS "In", derivative(mean("ifHCOutOctets"), 1s) *8 AS "Out" FROM "snmp" WHERE ("agent_host" = 'IP' AND "ifName" = 'interfacename') AND time >= now() - 2d GROUP BY time(2m), "ifName" fill(null)
