@@ -1,0 +1,30 @@
+---
+
+
+- name: Test routers_commands
+  hosts: alwayson
+  connection: network_cli
+  remote_user: tianh
+  gather_facts: false
+  tasks:
+  - name: "Ansible is working"
+    routeros_command:
+      commands: /log info "ansible is working"
+
+  - name: getting identity
+    routeros_command:
+      commands: ;put [/system identity get value-name=name ]
+    register: identity
+
+  - name: getting version
+    routeros_command:
+      commands: ;put [/system resource get value-name=version ]
+    register: version
+
+  - debug:
+      msg: "{{ identity.stdout}}{{ version.stdout}}"
+
+  - name: line insert
+    lineinfile: path=/tmp/alwaysonmikrotik.txt
+                line="{{ identity.stdout}}{{ version.stdout}}"
+                insertbefore=BOF
