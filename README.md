@@ -20,4 +20,8 @@ as it says, this is my ansible config, this works perfect for me. this is using 
 how to run script: 
 ```
 /usr/bin/ansible-playbook setsecurity.yml -e 'ansible_user=username ansible_ssh_pass="password" ansible_ssh_port=port'
-git
+```
+cron config:
+```
+0 */5 * * * /usr/bin/ansible-playbook /home/ansible/getrouteros.yml --limit @/home/ansible/getrouteros.retry -e "ansible_user=username ansible_ssh_pass=password"
+```
