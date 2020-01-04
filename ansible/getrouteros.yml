@@ -2,7 +2,7 @@
 
 
 - name: Test routers_commands
-  hosts: alwayson
+  hosts: yourhosts
   connection: network_cli
   remote_user: tianh
   gather_facts: false
