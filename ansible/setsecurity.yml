@@ -1,0 +1,70 @@
+---
+
+
+- name: Test routers_commands
+  hosts: yourhosts
+  connection: network_cli
+  remote_user: youruser
+  gather_facts: false
+  tasks:
+  - name: "Ansible is working"
+    routeros_command:
+      commands: /log info "ansible is working"
+
+  - name: getting identity
+    routeros_command:
+      commands: ;put [/system identity get value-name=name ]
+    register: identity
+
+  - name: getting version
+    routeros_command:
+      commands: ;put [/system resource get value-name=version ]
+    register: version
+
+  - name: getting channel
+    routeros_command:
+      commands: /system package update set channel=bugfix
+    register: seting channel to bug-fix/longterm
+
+  - name: disable services
+    routeros_command:
+      commands: /ip service disable telnet,ftp,www,api,api-ssl
+    register: disabling services
+
+  - name: setting ssh strict
+    routeros_command:
+      commands: /ip ssh set strong-crypto=yes
+    register: setting crypto strong
+
+  - name: disabling bw server
+    routeros_command:
+      commands: /tool bandwidth-server set enabled=no             
+    register: disabling BW server
+
+  - name: disabling proxy
+    routeros_command:
+      commands: /ip proxy set enabled=no 
+    register: disabling proxying
+
+  - name: disabling upnp
+    routeros_command:
+      commands: /ip upnp set enabled=no 
+    register: disabling upnp
+
+  - name: set dns
+    routeros_command:
+      commands: /ip dns set allow-remote-requests=no 
+    register: set dns
+
+  - name: setting ssh port
+    routeros_command:
+      commands: /ip service set ssh port=portnumber
+    register: setting ssh port
+
+  - debug:
+      msg: "{{ identity.stdout}}{{ version.stdout}}"
+
+  - name: line insert
+    lineinfile: path=/tmp/settingsecurity.txt
+                line="{{ identity.stdout}}{{ version.stdout}}"
+                insertbefore=BOF
