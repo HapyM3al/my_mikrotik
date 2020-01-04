@@ -15,4 +15,9 @@ this is probably my favourite one for some reason. its simple enough, the ltap m
 
 ## ansible 
 
-as it says, this is my ansible config, this works perfect for me. 
+as it says, this is my ansible config, this works perfect for me. this is using routeros_commands. 
+
+how to run script: 
+'''
+/usr/bin/ansible-playbook setsecurity.yml -e 'ansible_user=username ansible_ssh_pass="password" ansible_ssh_port=port'
+'''
