@@ -8,5 +8,7 @@ INSERT INTO `radreply` VALUES (1,'username','Mikrotik-Group',':=','full');
 
 INSERT INTO `radcheck` VALUES (1,'username','Cleartext-Password',':=','password');
 
+# the above actually also works for 802.1X auth. brilliant I know. 
+
 # https://wiki.mikrotik.com/wiki/Manual:RADIUS_Client#Supported_RADIUS_Attributes
 # you can make data allocations and so on, ill add this at a later stage. 
