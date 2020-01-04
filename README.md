@@ -29,3 +29,21 @@ cron config:
 ## country block
 
 just blocking stuff here with ip firewall address-list this is mainly just my list of cidr that i feel shouldnt be speaking to me at all. 
+
+## syslog
+
+im using freebsd with syslog-ng and port 8514. full config in file below some other things might want, this rotates for 31 days then deletes it, i have about 30 routers running this already and usage isnt much because filtering garbage syslog that dont want from mikrotik topics facility already. 
+
+location:
+```
+/usr/local/etc/syslog-ng/conf.d/mikrotik.conf
+```
+using newsyslog for log rotation:
+```
+/usr/local/etc/newsyslog.conf.d/mikrotik
+```
+
+newsyslog config:
+```
+/var/log/mikrotik/*.log                 644  31    *    @T00  G
+```
