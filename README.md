@@ -12,3 +12,7 @@ this is because point to point OSPF with mikrotik seems to be pretty garbage. If
 ## ltap mini lte mode button
 
 this is probably my favourite one for some reason. its simple enough, the ltap mini has a mode button, this can be programmed to basically do whatever floats your goat. Mine is sim slot changing, this will change sim slot used every time its pressed, this logs a message and as well. It assumes APN is the same for both sims and as well auth method. 
+
+## ansible 
+
+as it says, this is my ansible config, this works perfect for me. 
