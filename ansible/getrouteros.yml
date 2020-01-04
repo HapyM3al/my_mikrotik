@@ -1,5 +1,6 @@
 ---
 
+# goes through all the routers, captures identity and routeros version logs to file. This helps finding routers that is vuln to attacks. 
 
 - name: Test routers_commands
   hosts: yourhosts
@@ -25,6 +26,6 @@
       msg: "{{ identity.stdout}}{{ version.stdout}}"
 
   - name: line insert
-    lineinfile: path=/tmp/alwaysonmikrotik.txt
+    lineinfile: path=/tmp/mikrotiks.txt
                 line="{{ identity.stdout}}{{ version.stdout}}"
                 insertbefore=BOF
