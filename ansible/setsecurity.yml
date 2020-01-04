@@ -1,5 +1,6 @@
 ---
 
+# welcome, this will improve your routers security, with all the vuln going round for mikoritk i feel most of you mikrotik folks should do this and learn to block DNS coming into router from WAN! 
 
 - name: Test routers_commands
   hosts: yourhosts
