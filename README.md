@@ -47,3 +47,7 @@ newsyslog config:
 ```
 /var/log/mikrotik/*.log                 644  31    *    @T00  G
 ```
+
+## telegraf
+
+my telegraf config for mikrotiks, as well the influxdb sql to get uptime/ram used/temp and interface traffic transmitted. 
