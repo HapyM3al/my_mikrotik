@@ -4,7 +4,7 @@
 - name: Test routers_commands
   hosts: yourhosts
   connection: network_cli
-  remote_user: tianh
+  remote_user: youruser
   gather_facts: false
   tasks:
   - name: "Ansible is working"
