@@ -25,3 +25,7 @@ cron config:
 ```
 0 */5 * * * /usr/bin/ansible-playbook /home/ansible/getrouteros.yml --limit @/home/ansible/getrouteros.retry -e "ansible_user=username ansible_ssh_pass=password"
 ```
+
+## country block
+
+just blocking stuff here with ip firewall address-list this is mainly just my list of cidr that i feel shouldnt be speaking to me at all. 
