@@ -22,9 +22,11 @@ how to run script:
 /usr/bin/ansible-playbook setsecurity.yml -e 'ansible_user=username ansible_ssh_pass="password" ansible_ssh_port=port'
 ```
 cron config:
+you could also just make hosts file with the router vars in them. 
 ```
 0 */5 * * * /usr/bin/ansible-playbook /home/ansible/getrouteros.yml --limit @/home/ansible/getrouteros.retry -e "ansible_user=username ansible_ssh_pass=password"
 ```
+
 
 ## country block
 
@@ -33,6 +35,7 @@ just blocking stuff here with ip firewall address-list this is mainly just my li
 ## syslog
 
 im using freebsd with syslog-ng and port 8514. full config in file below some other things might want, this rotates for 31 days then deletes it, i have about 30 routers running this already and usage isnt much because filtering garbage syslog that dont want from mikrotik topics facility already. 
+Keeping the syslog-ng config however ive moved this to logstash as its simpler and ELK stack can do more in general. 
 
 location:
 ```
@@ -55,3 +58,11 @@ my telegraf config for mikrotiks, as well the influxdb sql to get uptime/ram use
 ## freeradius
 
 some freeradius config and how to manage users better and verify auth. This can be used for 802.1X and hotspot/dhcp etc. Tested with hotspot,login and 802.1X. Works alright.
+
+## elastiflow
+
+This is python script to grab the threats from elastiflow table and make an mikrotik blacklist. 
+Its using last days data gte now-1d/d until lte now/d in elastisearch terms. I have croned to run every 6 hours. 
+Basically it does query and then first deletes old entries via ssh then iterates all entries size 100 and already desc order so all need to do is add an account update account info for ssh and that is it. 
+Change the elastiflow elasticsearch endpoint to your needs, im running it on docker so localhost and cronned locally. 
+Then also my docker-compose config. (12 cores, 32gb ram and 600gb disk).
